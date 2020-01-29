@@ -1,8 +1,29 @@
 apiVersion: v1
 entries:
   airflow:
-  - appVersion: 2.0.0-dev
-    created: "2020-01-28T17:44:22.024702039+01:00"
+  - apiVersion: v1
+    appVersion: 2.0.0-dev
+    created: "2020-01-29T12:29:18.788799393+01:00"
+    description: Airflow running on KubernetesExecutor
+    digest: 824252dd6a7f661d264cb0ce480c812a3841cafd77ec05d4b794ec88ad7bb653
+    home: https://usr/local/airflow.apache.org/
+    icon: https://usr/local/airflow.apache.org/_images/pin_large.png
+    keywords:
+    - workflow
+    - airflow
+    - dag
+    maintainers:
+    - email: bdevlieger@crunchanalytics.be
+      name: Brecht De VLieger
+    name: airflow
+    sources:
+    - https://usr/local/airflow.apache.org/
+    urls:
+    - https://tinyclues.github.io/airflow-kube-helm/airflow-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v1
+    appVersion: 2.0.0-dev
+    created: "2020-01-29T12:29:18.787887791+01:00"
     description: Airflow running on KubernetesExecutor
     digest: f98ecf17813a76e806024743b7ae9ef0f1dd93aa49a9c2fff6ca5d6b4f0d9cef
     home: https://usr/local/airflow.apache.org/
@@ -20,8 +41,9 @@ entries:
     urls:
     - https://tinyclues.github.io/airflow-kube-helm/airflow-0.0.2.tgz
     version: 0.0.2
-  - appVersion: 2.0.0-dev
-    created: "2020-01-28T17:44:22.024206799+01:00"
+  - apiVersion: v1
+    appVersion: 2.0.0-dev
+    created: "2020-01-29T12:29:18.786875722+01:00"
     description: Airflow running on KubernetesExecutor
     digest: 7b6f317ef2df8f73c394618cb55f8c03b60397a08c451c03710ae5d368dfef31
     home: https://usr/local/airflow.apache.org/
@@ -39,4 +61,4 @@ entries:
     urls:
     - https://tinyclues.github.io/airflow-kube-helm/airflow-0.0.1.tgz
     version: 0.0.1
-generated: "2020-01-28T17:44:22.023566245+01:00"
+generated: "2020-01-29T12:29:18.784985481+01:00"
