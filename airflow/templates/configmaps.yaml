@@ -52,7 +52,7 @@ metadata:
     heritage: {{ .Release.Service }}
 data:
   init-dags.sh: |
-{{ tpl (required "A valid .Values.airflow.init_dags entry required!" .Values.airflow.dags.persistence.init_dags) . | indent 4 }}
+{{ tpl (required "A valid .Values.airflow.dags.persistence.init_dags entry required!" .Values.airflow.dags.persistence.init_dags) . | indent 4 }}
 ---
 {{- end }}
 apiVersion: v1
