@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "airflow.fullname" . }}-init
+  name: airflow-init
   labels:
     app: {{ template "airflow.name" . }}
     chart: {{ template "airflow.chart" . }}
@@ -44,7 +44,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "airflow.fullname" . }}-init-dags
+  name: airflow-init-dags
   labels:
     app: {{ template "airflow.name" . }}
     chart: {{ template "airflow.chart" . }}
@@ -58,7 +58,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "airflow.fullname" . }}-nginx
+  name: airflow-nginx
   labels:
     app: {{ template "airflow.name" . }}
     chart: {{ template "airflow.chart" . }}
@@ -90,7 +90,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "airflow.fullname" . }}-config
+  name: airflow-config
   labels:
     app: {{ template "airflow.name" . }}
     chart: {{ template "airflow.chart" . }}
@@ -117,7 +117,7 @@ data:
     rbac = {{ .Values.airflow.rbac.enabled }}
 
     [kubernetes]
-    airflow_configmap = {{ template "airflow.fullname" . }}-config
+    airflow_configmap = airflow-config
     worker_container_repository = {{ .Values.airflow.image.repository }}
     worker_container_tag = {{ .Values.airflow.image.tag }}
     worker_container_image_pull_policy = {{ .Values.airflow.image.pull_policy }}
@@ -128,7 +128,7 @@ data:
     dags_volume_claim = {{ .Values.airflow.dags.persistence.existingClaim }}
     dags_volume_subpath = {{ .Values.airflow.dags.persistence.existingClaimSubPath }}
     {{- else }}
-    dags_volume_claim = {{ template "airflow.fullname" . }}-dags
+    dags_volume_claim = airflow-dags
     dags_volume_subpath =
     {{- end }}
     {{- else }}
@@ -141,7 +141,7 @@ data:
     logs_volume_claim = {{ .Values.airflow.logs.persistence.existingClaim }}
     logs_volume_subpath = {{ .Values.airflow.logs.persistence.existingClaimSubPath }}
     {{- else }}
-    logs_volume_claim = {{ template "airflow.fullname" . }}-logs
+    logs_volume_claim = airflow-logs
     logs_volume_subpath =
     {{- end }}
 
@@ -159,10 +159,10 @@ data:
     # should be supplied in the format: key = value
 
     [kubernetes_secrets]
-    AIRFLOW__CORE__SQL_ALCHEMY_CONN = {{ template "airflow.fullname" $ }}-env=AIRFLOW__CORE__SQL_ALCHEMY_CONN
-    AIRFLOW_HOME = {{ template "airflow.fullname" $ }}-env=AIRFLOW_HOME
+    AIRFLOW__CORE__SQL_ALCHEMY_CONN = airflow-env=AIRFLOW__CORE__SQL_ALCHEMY_CONN
+    AIRFLOW_HOME = airflow-env=AIRFLOW_HOME
     {{- range $setting, $option := .Values.airflow.config }}
-    {{ $setting }} = {{ template "airflow.fullname" $ }}-env={{ $setting }}
+    {{ $setting }} = airflow-env={{ $setting }}
     {{- end }}
 
     [cli]

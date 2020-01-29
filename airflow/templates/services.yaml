@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "airflow.fullname" . }}-web
+  name: airflow-web
   labels:
     app: {{ template "airflow.name" . }}-web
     chart: {{ template "airflow.chart" . }}

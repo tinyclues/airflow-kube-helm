@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "airflow.fullname" . }}-web
+  name: airflow-web
   labels:
     app: {{ template "airflow.name" . }}-web
     chart: {{ template "airflow.chart" . }}
@@ -18,7 +18,7 @@ spec:
         paths:
           - path: {{ .Values.ingress.web.path }}
             backend:
-              serviceName: {{ template "airflow.fullname" . }}-web
+              serviceName: airflow-web
               servicePort: web
       host: {{ .Values.ingress.web.host }}
 {{- end }}

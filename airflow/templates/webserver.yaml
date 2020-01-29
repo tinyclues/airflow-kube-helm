@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "airflow.fullname" . }}-web
+  name: airflow-web
   labels:
     app: {{ template "airflow.name" . }}-web
     chart: {{ template "airflow.chart" . }}
@@ -23,7 +23,7 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmaps.yaml") . | sha256sum }}
-        configmap.fabric8.io/update-on-change: "{{ template "airflow.fullname" . }}-env"
+        configmap.fabric8.io/update-on-change: "airflow-env"
       labels:
         app: {{ template "airflow.name" . }}-web
         release: {{ .Release.Name }}
@@ -44,7 +44,7 @@ spec:
             subPath: init-airflow.sh
         envFrom:
           - secretRef:
-              name: {{ template "airflow.fullname" . }}-env
+              name: airflow-env
         command:
           - "bash"
         args:
@@ -65,7 +65,7 @@ spec:
             subPath: init-dags.sh
         envFrom:
           - secretRef:
-              name: {{ template "airflow.fullname" . }}-env
+              name: airflow-env
         command:
           - "bash"
         args:
@@ -135,7 +135,7 @@ spec:
         args: ["webserver"]
         envFrom:
           - secretRef:
-              name: {{ template "airflow.fullname" . }}-env
+              name: airflow-env
         env:
         - name: AIRFLOW_KUBE_NAMESPACE
           valueFrom:
@@ -171,23 +171,23 @@ spec:
       volumes:
       - name: airflow-logs
         persistentVolumeClaim:
-          claimName: {{ if .Values.airflow.logs.persistence.existingClaim }}{{ .Values.airflow.logs.persistence.existingClaim }}{{- else }}{{ template "airflow.fullname" . }}-logs{{- end }}
+          claimName: airflow-logs
       - name: airflow-config
         configMap:
-          name: {{ template "airflow.fullname" . }}-config
+          name: airflow-config
       - name: webserver-config
         secret:
           secretName: webserver-config
       - name: init-airflow
         configMap:
-          name: {{ template "airflow.fullname" . }}-init
+          name: airflow-init
       - name: nginx
         configMap:
-          name: {{ template "airflow.fullname" . }}-nginx
+          name: airflow-nginx
       {{- if .Values.airflow.dags.persistence.enabled }}
       - name: init-dags
         configMap:
-          name: {{ template "airflow.fullname" . }}-init-dags
+          name: airflow-init-dags
       {{- end }}
       - name: airflow-dags
         {{- if .Values.airflow.dags.persistence.enabled }}
@@ -195,7 +195,7 @@ spec:
           {{- if .Values.airflow.dags.persistence.existingClaim }}
           claimName: "{{ .Values.airflow.dags.persistence.existingClaim }}"
           {{- else }}
-          claimName: {{ template "airflow.fullname" . }}-dags
+          claimName: airflow-dags
           {{- end }}
         {{- else }}
         emptyDir: {}
